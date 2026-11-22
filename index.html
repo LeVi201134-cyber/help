@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tanulói Belépés</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#1f1f1f;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.card{
+    width:900px;
+    max-width:100%;
+    background:#0b0b0b;
+    color:white;
+    border-radius:28px;
+    padding:60px;
+    display:flex;
+    justify-content:space-between;
+    gap:60px;
+}
+
+.left{
+    min-width:300px;
+}
+
+.logo{
+     width:80px;
+    height:80px;
+    border-radius:20px;
+    object-fit:cover;
+    margin-bottom:30px;
+}
+
+.left h1{
+    font-size:42px;
+    font-weight:400;
+    margin-bottom:20px;
+}
+
+.account-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:4px 10px 4px 4px;
+    border:1px solid #5f6368;
+    border-radius:999px;
+    background:#202124;
+    color:white;
+    font-size:14px;
+}
+
+.avatar{
+    width:24px;
+    height:24px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.email{
+    white-space:nowrap;
+}
+
+.arrow{
+    color:#9aa0a6;
+    font-size:10px;
+}
+
+.right{
+    flex:1;
+}
+
+.right p{
+    margin-bottom:30px;
+    font-size:18px;
+}
+
+input[type="password"],
+input[type="text"]{
+    width:100%;
+    padding:16px;
+    background:transparent;
+    border:1px solid #666;
+    border-radius:4px;
+    color:white;
+    font-size:16px;
+}
+
+.options{
+    margin-top:12px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.options input[type="checkbox"]{
+    width:auto;
+}
+
+label{
+    cursor:pointer;
+}
+
+button{
+    margin-top:30px;
+    float:right;
+    padding:12px 28px;
+    border:none;
+    border-radius:24px;
+    background:#8ab4f8;
+    color:#000;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:0.9;
+}
+
+@media(max-width:768px){
+    .card{
+        flex-direction:column;
+        padding:30px;
+    }
+
+    .left h1{
+        font-size:32px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+
+    <div class="left">
+
+        <!-- Saját logó -->
+        <img src="C:\Users\kovac\Documents\google.png" alt="Logo" class="logo">
+
+        <h1>Krisztina Béresné Madai</h1>
+
+        <div class="account-chip">
+            <img src="C:\Users\kovac\Documents\kémia.jpg" alt="Profilkép" class="avatar">
+
+            <span class="email">
+                beresne.madai.krisztina@jezsu.hu
+            </span>
+
+            <span class="arrow">▼</span>
+        </div>
+
+    </div>
+
+    <div class="right">
+
+        <p>Adja meg a jelszót a folytatáshoz</p>
+
+        <input
+            type="password"
+            id="pwd"
+            placeholder="Jelszó"
+        >
+
+        <div class="options">
+            <input type="checkbox" id="show">
+
+            <label for="show">
+                Jelszó megjelenítése
+            </label>
+        </div>
+
+        <button type="button" onclick="login()">
+            Tovább
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+const checkbox = document.getElementById("show");
+const password = document.getElementById("pwd");
+
+checkbox.addEventListener("change", () => {
+    password.type = checkbox.checked
+        ? "text"
+        : "password";
+});
+
+function login(){
+    alert("Demó oldal - nincs valódi bejelentkezés.");
+}
+</script>
+
+</body>
+</html>				
